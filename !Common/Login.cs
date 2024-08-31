@@ -23,8 +23,8 @@ namespace library_app
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = "cipicipi";
-            string password = "capacapa123";
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
 
             if(string.IsNullOrEmpty(username))
             {

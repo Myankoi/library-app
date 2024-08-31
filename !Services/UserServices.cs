@@ -42,19 +42,29 @@ namespace library_app
         {
             try
             {
-                HashingPassword Hash = new HashingPassword();
-                string hashedPassword = Hash.HashPassword(password);
+                HashingPassword hash = new HashingPassword();
+                string hashedPassword = hash.HashPassword(password);
+                var existingUsername = dc.users.Where(u => u.username.Equals(username)).FirstOrDefault();
+                var existingEmail = dc.users.Where(u => u.email.Equals(email)).FirstOrDefault();
 
-                user userData = new user { 
-                    email = email,
-                    username = username,
-                    password = hashedPassword
-                };
+                if (existingUsername != null || existingEmail != null)
+                {
+                    MessageBox.Show("Username or email has been used!");
+                    return;
+                } else
+                {
+                    user userData = new user
+                    {
+                        email = email,
+                        username = username,
+                        password = hashedPassword,
+                    };
 
-                dc.users.InsertOnSubmit(userData);
-                dc.SubmitChanges();
+                    dc.users.InsertOnSubmit(userData);
+                    dc.SubmitChanges();
 
-                MessageBox.Show("Registration success!");
+                    MessageBox.Show("Registration success!");
+                }  
             }
             catch (Exception ex)
             {

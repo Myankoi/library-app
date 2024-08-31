@@ -12,12 +12,13 @@ namespace library_app
         public bool UIAdjustBasedOnUserRole(string username)
         {
             var userRole = dc.users.Where(u => u.username.Equals(username)).FirstOrDefault();
-            if (userRole == null)
+            if (userRole.role_id == 1)
+            {
+                return true;
+            } else
             {
                 return false;
             }
-
-            return userRole.role_id == 1;
         }
     }
 }
