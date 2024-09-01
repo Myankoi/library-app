@@ -8,6 +8,8 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Data.Linq;
 
 namespace library_app
 {
@@ -29,10 +31,12 @@ namespace library_app
             DateTime publishedDate = datePublished.Value.Date;
             int pages = Convert.ToInt32(txtPages.Text);
             int availableCopies = Convert.ToInt32(txtCopies.Text);
+            Image bookCover = picCover.Image;
 
-            if (title == null || author == null || publisher == null || publishedDate == null)
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(publisher))
             {
                 MessageBox.Show("Please fill all data book!");
+                return;
             }
 
             if (!int.TryParse(txtPages.Text, out pages) || !int.TryParse(txtCopies.Text, out availableCopies))
@@ -49,7 +53,8 @@ namespace library_app
                 publisher = publisher,
                 published = publishedDate,
                 pages = pages,
-                available_copies = availableCopies
+                available_copies = availableCopies,
+                book_cover = ConvertImageToBinary(bookCover)
             };
 
                 dc.books.InsertOnSubmit(newBook);
@@ -65,9 +70,26 @@ namespace library_app
             this.Invalidate();
         }
 
-            private void picCover_Click(object sender, EventArgs e)
+        private void picCover_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.bmp)|*.jpg;*.jpeg;*.bmp";
 
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                coverImage = Image.FromFile(openFileDialog.FileName);
+                picCover.Image = coverImage;
+            }
+        }
+
+        public Binary ConvertImageToBinary(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                byte[] imageBytes = ms.ToArray();  
+                return new Binary(imageBytes);
+            }
         }
 
         private void loadAvailableBook()

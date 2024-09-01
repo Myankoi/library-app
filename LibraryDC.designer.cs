@@ -30,9 +30,6 @@ namespace library_app
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertbook(book instance);
-    partial void Updatebook(book instance);
-    partial void Deletebook(book instance);
     partial void InsertissueBook(issueBook instance);
     partial void UpdateissueBook(issueBook instance);
     partial void DeleteissueBook(issueBook instance);
@@ -42,6 +39,9 @@ namespace library_app
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
+    partial void Insertbook(book instance);
+    partial void Updatebook(book instance);
+    partial void Deletebook(book instance);
     #endregion
 		
 		public LibraryDCDataContext() : 
@@ -74,14 +74,6 @@ namespace library_app
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<book> books
-		{
-			get
-			{
-				return this.GetTable<book>();
-			}
-		}
-		
 		public System.Data.Linq.Table<issueBook> issueBooks
 		{
 			get
@@ -105,287 +97,13 @@ namespace library_app
 				return this.GetTable<user>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.book")]
-	public partial class book : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _title;
-		
-		private string _author;
-		
-		private string _publisher;
-		
-		private System.DateTime _published;
-		
-		private int _pages;
-		
-		private int _available_copies;
-		
-		private System.DateTime _added_at;
-		
-		private System.Nullable<System.DateTime> _lastIssued_at;
-		
-		private EntitySet<issueBook> _issueBooks;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OnauthorChanging(string value);
-    partial void OnauthorChanged();
-    partial void OnpublisherChanging(string value);
-    partial void OnpublisherChanged();
-    partial void OnpublishedChanging(System.DateTime value);
-    partial void OnpublishedChanged();
-    partial void OnpagesChanging(int value);
-    partial void OnpagesChanged();
-    partial void Onavailable_copiesChanging(int value);
-    partial void Onavailable_copiesChanged();
-    partial void Onadded_atChanging(System.DateTime value);
-    partial void Onadded_atChanged();
-    partial void OnlastIssued_atChanging(System.Nullable<System.DateTime> value);
-    partial void OnlastIssued_atChanged();
-    #endregion
-		
-		public book()
-		{
-			this._issueBooks = new EntitySet<issueBook>(new Action<issueBook>(this.attach_issueBooks), new Action<issueBook>(this.detach_issueBooks));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
+		public System.Data.Linq.Table<book> books
 		{
 			get
 			{
-				return this._id;
+				return this.GetTable<book>();
 			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string author
-		{
-			get
-			{
-				return this._author;
-			}
-			set
-			{
-				if ((this._author != value))
-				{
-					this.OnauthorChanging(value);
-					this.SendPropertyChanging();
-					this._author = value;
-					this.SendPropertyChanged("author");
-					this.OnauthorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publisher", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string publisher
-		{
-			get
-			{
-				return this._publisher;
-			}
-			set
-			{
-				if ((this._publisher != value))
-				{
-					this.OnpublisherChanging(value);
-					this.SendPropertyChanging();
-					this._publisher = value;
-					this.SendPropertyChanged("publisher");
-					this.OnpublisherChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_published", DbType="Date NOT NULL")]
-		public System.DateTime published
-		{
-			get
-			{
-				return this._published;
-			}
-			set
-			{
-				if ((this._published != value))
-				{
-					this.OnpublishedChanging(value);
-					this.SendPropertyChanging();
-					this._published = value;
-					this.SendPropertyChanged("published");
-					this.OnpublishedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pages", DbType="Int NOT NULL")]
-		public int pages
-		{
-			get
-			{
-				return this._pages;
-			}
-			set
-			{
-				if ((this._pages != value))
-				{
-					this.OnpagesChanging(value);
-					this.SendPropertyChanging();
-					this._pages = value;
-					this.SendPropertyChanged("pages");
-					this.OnpagesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_available_copies", DbType="Int NOT NULL")]
-		public int available_copies
-		{
-			get
-			{
-				return this._available_copies;
-			}
-			set
-			{
-				if ((this._available_copies != value))
-				{
-					this.Onavailable_copiesChanging(value);
-					this.SendPropertyChanging();
-					this._available_copies = value;
-					this.SendPropertyChanged("available_copies");
-					this.Onavailable_copiesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_added_at", DbType="DateTime NOT NULL", IsDbGenerated=true)]
-		public System.DateTime added_at
-		{
-			get
-			{
-				return this._added_at;
-			}
-			set
-			{
-				if ((this._added_at != value))
-				{
-					this.Onadded_atChanging(value);
-					this.SendPropertyChanging();
-					this._added_at = value;
-					this.SendPropertyChanged("added_at");
-					this.Onadded_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastIssued_at", DbType="Date")]
-		public System.Nullable<System.DateTime> lastIssued_at
-		{
-			get
-			{
-				return this._lastIssued_at;
-			}
-			set
-			{
-				if ((this._lastIssued_at != value))
-				{
-					this.OnlastIssued_atChanging(value);
-					this.SendPropertyChanging();
-					this._lastIssued_at = value;
-					this.SendPropertyChanged("lastIssued_at");
-					this.OnlastIssued_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_issueBook", Storage="_issueBooks", ThisKey="id", OtherKey="book_id")]
-		public EntitySet<issueBook> issueBooks
-		{
-			get
-			{
-				return this._issueBooks;
-			}
-			set
-			{
-				this._issueBooks.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_issueBooks(issueBook entity)
-		{
-			this.SendPropertyChanging();
-			entity.book = this;
-		}
-		
-		private void detach_issueBooks(issueBook entity)
-		{
-			this.SendPropertyChanging();
-			entity.book = null;
 		}
 	}
 	
@@ -407,9 +125,9 @@ namespace library_app
 		
 		private System.Nullable<System.DateTime> _return_at;
 		
-		private EntityRef<book> _book;
-		
 		private EntityRef<user> _user;
+		
+		private EntityRef<book> _book;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -431,8 +149,8 @@ namespace library_app
 		
 		public issueBook()
 		{
-			this._book = default(EntityRef<book>);
 			this._user = default(EntityRef<user>);
+			this._book = default(EntityRef<book>);
 			OnCreated();
 		}
 		
@@ -564,40 +282,6 @@ namespace library_app
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_issueBook", Storage="_book", ThisKey="book_id", OtherKey="id", IsForeignKey=true)]
-		public book book
-		{
-			get
-			{
-				return this._book.Entity;
-			}
-			set
-			{
-				book previousValue = this._book.Entity;
-				if (((previousValue != value) 
-							|| (this._book.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._book.Entity = null;
-						previousValue.issueBooks.Remove(this);
-					}
-					this._book.Entity = value;
-					if ((value != null))
-					{
-						value.issueBooks.Add(this);
-						this._book_id = value.id;
-					}
-					else
-					{
-						this._book_id = default(int);
-					}
-					this.SendPropertyChanged("book");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_issueBook", Storage="_user", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public user user
 		{
@@ -628,6 +312,40 @@ namespace library_app
 						this._user_id = default(int);
 					}
 					this.SendPropertyChanged("user");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_issueBook", Storage="_book", ThisKey="book_id", OtherKey="id", IsForeignKey=true)]
+		public book book
+		{
+			get
+			{
+				return this._book.Entity;
+			}
+			set
+			{
+				book previousValue = this._book.Entity;
+				if (((previousValue != value) 
+							|| (this._book.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._book.Entity = null;
+						previousValue.issueBooks.Remove(this);
+					}
+					this._book.Entity = value;
+					if ((value != null))
+					{
+						value.issueBooks.Add(this);
+						this._book_id = value.id;
+					}
+					else
+					{
+						this._book_id = default(int);
+					}
+					this.SendPropertyChanged("book");
 				}
 			}
 		}
@@ -1039,6 +757,312 @@ namespace library_app
 		{
 			this.SendPropertyChanging();
 			entity.user = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.book")]
+	public partial class book : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private string _author;
+		
+		private string _publisher;
+		
+		private System.DateTime _published;
+		
+		private int _pages;
+		
+		private int _available_copies;
+		
+		private System.DateTime _added_at;
+		
+		private System.Nullable<System.DateTime> _lastIssued_at;
+		
+		private System.Data.Linq.Binary _book_cover;
+		
+		private EntitySet<issueBook> _issueBooks;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnauthorChanging(string value);
+    partial void OnauthorChanged();
+    partial void OnpublisherChanging(string value);
+    partial void OnpublisherChanged();
+    partial void OnpublishedChanging(System.DateTime value);
+    partial void OnpublishedChanged();
+    partial void OnpagesChanging(int value);
+    partial void OnpagesChanged();
+    partial void Onavailable_copiesChanging(int value);
+    partial void Onavailable_copiesChanged();
+    partial void Onadded_atChanging(System.DateTime value);
+    partial void Onadded_atChanged();
+    partial void OnlastIssued_atChanging(System.Nullable<System.DateTime> value);
+    partial void OnlastIssued_atChanged();
+    partial void Onbook_coverChanging(System.Data.Linq.Binary value);
+    partial void Onbook_coverChanged();
+    #endregion
+		
+		public book()
+		{
+			this._issueBooks = new EntitySet<issueBook>(new Action<issueBook>(this.attach_issueBooks), new Action<issueBook>(this.detach_issueBooks));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(256) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author", DbType="VarChar(256) NOT NULL", CanBeNull=false)]
+		public string author
+		{
+			get
+			{
+				return this._author;
+			}
+			set
+			{
+				if ((this._author != value))
+				{
+					this.OnauthorChanging(value);
+					this.SendPropertyChanging();
+					this._author = value;
+					this.SendPropertyChanged("author");
+					this.OnauthorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publisher", DbType="VarChar(256) NOT NULL", CanBeNull=false)]
+		public string publisher
+		{
+			get
+			{
+				return this._publisher;
+			}
+			set
+			{
+				if ((this._publisher != value))
+				{
+					this.OnpublisherChanging(value);
+					this.SendPropertyChanging();
+					this._publisher = value;
+					this.SendPropertyChanged("publisher");
+					this.OnpublisherChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_published", DbType="Date NOT NULL")]
+		public System.DateTime published
+		{
+			get
+			{
+				return this._published;
+			}
+			set
+			{
+				if ((this._published != value))
+				{
+					this.OnpublishedChanging(value);
+					this.SendPropertyChanging();
+					this._published = value;
+					this.SendPropertyChanged("published");
+					this.OnpublishedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pages", DbType="Int NOT NULL")]
+		public int pages
+		{
+			get
+			{
+				return this._pages;
+			}
+			set
+			{
+				if ((this._pages != value))
+				{
+					this.OnpagesChanging(value);
+					this.SendPropertyChanging();
+					this._pages = value;
+					this.SendPropertyChanged("pages");
+					this.OnpagesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_available_copies", DbType="Int NOT NULL")]
+		public int available_copies
+		{
+			get
+			{
+				return this._available_copies;
+			}
+			set
+			{
+				if ((this._available_copies != value))
+				{
+					this.Onavailable_copiesChanging(value);
+					this.SendPropertyChanging();
+					this._available_copies = value;
+					this.SendPropertyChanged("available_copies");
+					this.Onavailable_copiesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_added_at", DbType="DateTime NOT NULL")]
+		public System.DateTime added_at
+		{
+			get
+			{
+				return this._added_at;
+			}
+			set
+			{
+				if ((this._added_at != value))
+				{
+					this.Onadded_atChanging(value);
+					this.SendPropertyChanging();
+					this._added_at = value;
+					this.SendPropertyChanged("added_at");
+					this.Onadded_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastIssued_at", DbType="Date")]
+		public System.Nullable<System.DateTime> lastIssued_at
+		{
+			get
+			{
+				return this._lastIssued_at;
+			}
+			set
+			{
+				if ((this._lastIssued_at != value))
+				{
+					this.OnlastIssued_atChanging(value);
+					this.SendPropertyChanging();
+					this._lastIssued_at = value;
+					this.SendPropertyChanged("lastIssued_at");
+					this.OnlastIssued_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_book_cover", DbType="Image", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary book_cover
+		{
+			get
+			{
+				return this._book_cover;
+			}
+			set
+			{
+				if ((this._book_cover != value))
+				{
+					this.Onbook_coverChanging(value);
+					this.SendPropertyChanging();
+					this._book_cover = value;
+					this.SendPropertyChanged("book_cover");
+					this.Onbook_coverChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_issueBook", Storage="_issueBooks", ThisKey="id", OtherKey="book_id")]
+		public EntitySet<issueBook> issueBooks
+		{
+			get
+			{
+				return this._issueBooks;
+			}
+			set
+			{
+				this._issueBooks.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_issueBooks(issueBook entity)
+		{
+			this.SendPropertyChanging();
+			entity.book = this;
+		}
+		
+		private void detach_issueBooks(issueBook entity)
+		{
+			this.SendPropertyChanging();
+			entity.book = null;
 		}
 	}
 }

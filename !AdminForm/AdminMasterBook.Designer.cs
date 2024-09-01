@@ -46,7 +46,7 @@
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.txtAuthor = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.btnUpload = new System.Windows.Forms.Button();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -136,10 +136,12 @@
             // picCover
             // 
             this.picCover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.picCover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.picCover.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picCover.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picCover.Location = new System.Drawing.Point(749, 6);
             this.picCover.Name = "picCover";
-            this.picCover.Size = new System.Drawing.Size(84, 135);
+            this.picCover.Size = new System.Drawing.Size(92, 135);
             this.picCover.TabIndex = 12;
             this.picCover.TabStop = false;
             this.picCover.Click += new System.EventHandler(this.picCover_Click);
@@ -254,7 +256,7 @@
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel6.Controls.Add(this.btnUpload);
+            this.panel6.Controls.Add(this.btnBrowse);
             this.panel6.Controls.Add(this.btnDelete);
             this.panel6.Controls.Add(this.btnClear);
             this.panel6.Controls.Add(this.btnAdd);
@@ -264,20 +266,20 @@
             this.panel6.Size = new System.Drawing.Size(875, 70);
             this.panel6.TabIndex = 16;
             // 
-            // btnUpload
+            // btnBrowse
             // 
-            this.btnUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnUpload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnUpload.FlatAppearance.BorderSize = 0;
-            this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpload.Location = new System.Drawing.Point(734, 13);
-            this.btnUpload.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(120, 45);
-            this.btnUpload.TabIndex = 11;
-            this.btnUpload.Text = "UPLOAD";
-            this.btnUpload.UseVisualStyleBackColor = false;
+            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnBrowse.FlatAppearance.BorderSize = 0;
+            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowse.Location = new System.Drawing.Point(734, 13);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(120, 45);
+            this.btnBrowse.TabIndex = 11;
+            this.btnBrowse.Text = "BROWSE";
+            this.btnBrowse.UseVisualStyleBackColor = false;
             // 
             // btnDelete
             // 
@@ -370,13 +372,13 @@
             this.dgvAvailableBook.TabIndex = 0;
             this.dgvAvailableBook.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAvailableBook_CellClick);
             // 
-            // AdminAddBook
+            // AdminMasterBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel4);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "AdminAddBook";
+            this.Name = "AdminMasterBook";
             this.Size = new System.Drawing.Size(928, 502);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -417,6 +419,6 @@
         private System.Windows.Forms.DataGridView dgvAvailableBook;
         private System.Windows.Forms.DateTimePicker datePublished;
         private System.Windows.Forms.PictureBox picCover;
-        private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Button btnBrowse;
     }
 }
