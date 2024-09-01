@@ -2,14 +2,14 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-QHHO1MR;Initial Catalog=library-app;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="library_app.Properties.Settings" SettingsPropertyName="library_appConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.book" Member="books">
     <Type Name="book">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="author" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="publisher" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="published" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="pages" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="available_copies" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="added_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="added_at" AutoSync="Never" Type="System.DateTime" DbType="DateTime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="lastIssued_at" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Association Name="book_issueBook" Member="issueBooks" ThisKey="id" OtherKey="book_id" Type="issueBook" />
     </Type>
@@ -18,8 +18,8 @@
     <Type Name="issueBook">
       <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="book_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="issued_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="issue_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="issued_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="issue_at" AutoSync="OnInsert" Type="System.DateTime" DbType="DateTime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="due_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="return_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="book_issueBook" Member="book" ThisKey="book_id" OtherKey="id" Type="book" IsForeignKey="true" />
@@ -28,7 +28,7 @@
   </Table>
   <Table Name="dbo.role" Member="roles">
     <Type Name="role">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="role_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="role_user" Member="users" ThisKey="id" OtherKey="role_id" Type="user" />
     </Type>
