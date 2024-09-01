@@ -27,8 +27,13 @@ namespace library_app
             string author = txtAuthor.Text;
             string publisher = txtPublisher.Text;
             DateTime publishedDate = datePublished.Value.Date;
-            int pages;
-            int availableCopies;
+            int pages = Convert.ToInt32(txtPages.Text);
+            int availableCopies = Convert.ToInt32(txtCopies.Text);
+
+            if (title == null || author == null || publisher == null || publishedDate == null)
+            {
+                MessageBox.Show("Please fill all data book!");
+            }
 
             if (!int.TryParse(txtPages.Text, out pages) || !int.TryParse(txtCopies.Text, out availableCopies))
             {
@@ -57,6 +62,7 @@ namespace library_app
             {
                 MessageBox.Show("Error adding book: " + ex.Message);
             }
+            this.Invalidate();
         }
 
             private void picCover_Click(object sender, EventArgs e)
