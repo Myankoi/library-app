@@ -142,9 +142,9 @@
             this.picCover.Location = new System.Drawing.Point(749, 6);
             this.picCover.Name = "picCover";
             this.picCover.Size = new System.Drawing.Size(92, 135);
+            this.picCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picCover.TabIndex = 12;
             this.picCover.TabStop = false;
-            this.picCover.Click += new System.EventHandler(this.picCover_Click);
             // 
             // txtPages
             // 
@@ -280,6 +280,7 @@
             this.btnBrowse.TabIndex = 11;
             this.btnBrowse.Text = "BROWSE";
             this.btnBrowse.UseVisualStyleBackColor = false;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // btnDelete
             // 
@@ -310,6 +311,7 @@
             this.btnClear.TabIndex = 10;
             this.btnClear.Text = "CLEAR";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnAdd
             // 

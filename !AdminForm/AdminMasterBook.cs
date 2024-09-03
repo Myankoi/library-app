@@ -54,10 +54,10 @@ namespace library_app
                 published = publishedDate,
                 pages = pages,
                 available_copies = availableCopies,
-                book_cover = ConvertImageToBinary(bookCover)
+                image = ConvertImageToBase64(bookCover)
             };
 
-                dc.books.InsertOnSubmit(newBook);
+            dc.books.InsertOnSubmit(newBook);
             try
             {
                 dc.SubmitChanges();
@@ -70,26 +70,26 @@ namespace library_app
             this.Invalidate();
         }
 
-        private void picCover_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.bmp)|*.jpg;*.jpeg;*.bmp";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                coverImage = Image.FromFile(openFileDialog.FileName);
-                picCover.Image = coverImage;
-            }
-        }
-
-        public Binary ConvertImageToBinary(Image image)
+        public String ConvertImageToBase64(Image image)
         {
             using (MemoryStream ms = new MemoryStream())
             {
                 image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                byte[] imageBytes = ms.ToArray();  
-                return new Binary(imageBytes);
+                byte[] imageBytes = ms.ToArray();
+                return Convert.ToBase64String(imageBytes);
             }
+        }
+        public Image ConvertBase64ToImage(string imageString)
+        {
+            byte[] bytes = Convert.FromBase64String(imageString);
+
+            Image image;
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                image = Image.FromStream(ms);
+            }
+
+            return image;
         }
 
         private void loadAvailableBook()
@@ -101,25 +101,50 @@ namespace library_app
             dgvAvailableBook.Columns.Add("Publish At", "Publish At");
             dgvAvailableBook.Columns.Add("Total Page", "Total Page");
             dgvAvailableBook.Columns.Add("Available", "Available");
+            dgvAvailableBook.Columns.Add("Image", "Image");
+            dgvAvailableBook.Columns["Image"].Visible = false;
             foreach (var book in availableBooks)
             {
                 dgvAvailableBook.Rows.Add(
-                    book.title, book.author, 
-                    book.publisher, book.published.ToShortDateString(), 
-                    book.pages, book.available_copies
+                    book.title, book.author,
+                    book.publisher, book.published.ToShortDateString(),
+                    book.pages, book.available_copies, book.image
                 );
             }
         }
 
         private void dgvAvailableBook_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
             txtTitle.Text = dgvAvailableBook.CurrentRow.Cells[0].Value.ToString();
             txtAuthor.Text = dgvAvailableBook.CurrentRow.Cells[1].Value.ToString();
             txtPublisher.Text = dgvAvailableBook.CurrentRow.Cells[2].Value.ToString();
             datePublished.Text = dgvAvailableBook.CurrentRow.Cells[3].Value.ToString();
             txtPages.Text = dgvAvailableBook.CurrentRow.Cells[4].Value.ToString();
             txtCopies.Text = dgvAvailableBook.CurrentRow.Cells[5].Value.ToString();
+            picCover.Image = ConvertBase64ToImage(dgvAvailableBook.CurrentRow.Cells[6].Value.ToString());
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.bmp)|*.jpg;*.jpeg;*.bmp";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                coverImage = Image.FromFile(openFileDialog.FileName);
+                picCover.Image = coverImage;
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtTitle.Clear();
+            txtAuthor.Clear();
+            txtPublisher.Clear();
+            datePublished.ResetText();
+            txtPages.Clear();
+            txtCopies.Clear();
+            picCover.Image = null;
         }
     }
 }

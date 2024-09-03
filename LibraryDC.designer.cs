@@ -30,18 +30,18 @@ namespace library_app
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void Insertbook(book instance);
+    partial void Updatebook(book instance);
+    partial void Deletebook(book instance);
+    partial void Insertuser(user instance);
+    partial void Updateuser(user instance);
+    partial void Deleteuser(user instance);
     partial void InsertissueBook(issueBook instance);
     partial void UpdateissueBook(issueBook instance);
     partial void DeleteissueBook(issueBook instance);
     partial void Insertrole(role instance);
     partial void Updaterole(role instance);
     partial void Deleterole(role instance);
-    partial void Insertuser(user instance);
-    partial void Updateuser(user instance);
-    partial void Deleteuser(user instance);
-    partial void Insertbook(book instance);
-    partial void Updatebook(book instance);
-    partial void Deletebook(book instance);
     #endregion
 		
 		public LibraryDCDataContext() : 
@@ -74,6 +74,22 @@ namespace library_app
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<book> books
+		{
+			get
+			{
+				return this.GetTable<book>();
+			}
+		}
+		
+		public System.Data.Linq.Table<user> users
+		{
+			get
+			{
+				return this.GetTable<user>();
+			}
+		}
+		
 		public System.Data.Linq.Table<issueBook> issueBooks
 		{
 			get
@@ -88,675 +104,6 @@ namespace library_app
 			{
 				return this.GetTable<role>();
 			}
-		}
-		
-		public System.Data.Linq.Table<user> users
-		{
-			get
-			{
-				return this.GetTable<user>();
-			}
-		}
-		
-		public System.Data.Linq.Table<book> books
-		{
-			get
-			{
-				return this.GetTable<book>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.issueBook")]
-	public partial class issueBook : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _user_id;
-		
-		private int _book_id;
-		
-		private int _issued_id;
-		
-		private System.DateTime _issue_at;
-		
-		private System.DateTime _due_at;
-		
-		private System.Nullable<System.DateTime> _return_at;
-		
-		private EntityRef<user> _user;
-		
-		private EntityRef<book> _book;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onuser_idChanging(int value);
-    partial void Onuser_idChanged();
-    partial void Onbook_idChanging(int value);
-    partial void Onbook_idChanged();
-    partial void Onissued_idChanging(int value);
-    partial void Onissued_idChanged();
-    partial void Onissue_atChanging(System.DateTime value);
-    partial void Onissue_atChanged();
-    partial void Ondue_atChanging(System.DateTime value);
-    partial void Ondue_atChanged();
-    partial void Onreturn_atChanging(System.Nullable<System.DateTime> value);
-    partial void Onreturn_atChanged();
-    #endregion
-		
-		public issueBook()
-		{
-			this._user = default(EntityRef<user>);
-			this._book = default(EntityRef<book>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
-		public int user_id
-		{
-			get
-			{
-				return this._user_id;
-			}
-			set
-			{
-				if ((this._user_id != value))
-				{
-					if (this._user.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onuser_idChanging(value);
-					this.SendPropertyChanging();
-					this._user_id = value;
-					this.SendPropertyChanged("user_id");
-					this.Onuser_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_book_id", DbType="Int NOT NULL")]
-		public int book_id
-		{
-			get
-			{
-				return this._book_id;
-			}
-			set
-			{
-				if ((this._book_id != value))
-				{
-					if (this._book.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onbook_idChanging(value);
-					this.SendPropertyChanging();
-					this._book_id = value;
-					this.SendPropertyChanged("book_id");
-					this.Onbook_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_issued_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int issued_id
-		{
-			get
-			{
-				return this._issued_id;
-			}
-			set
-			{
-				if ((this._issued_id != value))
-				{
-					this.Onissued_idChanging(value);
-					this.SendPropertyChanging();
-					this._issued_id = value;
-					this.SendPropertyChanged("issued_id");
-					this.Onissued_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_issue_at", AutoSync=AutoSync.OnInsert, DbType="DateTime NOT NULL", IsDbGenerated=true)]
-		public System.DateTime issue_at
-		{
-			get
-			{
-				return this._issue_at;
-			}
-			set
-			{
-				if ((this._issue_at != value))
-				{
-					this.Onissue_atChanging(value);
-					this.SendPropertyChanging();
-					this._issue_at = value;
-					this.SendPropertyChanged("issue_at");
-					this.Onissue_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_due_at", DbType="DateTime NOT NULL")]
-		public System.DateTime due_at
-		{
-			get
-			{
-				return this._due_at;
-			}
-			set
-			{
-				if ((this._due_at != value))
-				{
-					this.Ondue_atChanging(value);
-					this.SendPropertyChanging();
-					this._due_at = value;
-					this.SendPropertyChanged("due_at");
-					this.Ondue_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_return_at", DbType="DateTime")]
-		public System.Nullable<System.DateTime> return_at
-		{
-			get
-			{
-				return this._return_at;
-			}
-			set
-			{
-				if ((this._return_at != value))
-				{
-					this.Onreturn_atChanging(value);
-					this.SendPropertyChanging();
-					this._return_at = value;
-					this.SendPropertyChanged("return_at");
-					this.Onreturn_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_issueBook", Storage="_user", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
-		public user user
-		{
-			get
-			{
-				return this._user.Entity;
-			}
-			set
-			{
-				user previousValue = this._user.Entity;
-				if (((previousValue != value) 
-							|| (this._user.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._user.Entity = null;
-						previousValue.issueBooks.Remove(this);
-					}
-					this._user.Entity = value;
-					if ((value != null))
-					{
-						value.issueBooks.Add(this);
-						this._user_id = value.id;
-					}
-					else
-					{
-						this._user_id = default(int);
-					}
-					this.SendPropertyChanged("user");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_issueBook", Storage="_book", ThisKey="book_id", OtherKey="id", IsForeignKey=true)]
-		public book book
-		{
-			get
-			{
-				return this._book.Entity;
-			}
-			set
-			{
-				book previousValue = this._book.Entity;
-				if (((previousValue != value) 
-							|| (this._book.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._book.Entity = null;
-						previousValue.issueBooks.Remove(this);
-					}
-					this._book.Entity = value;
-					if ((value != null))
-					{
-						value.issueBooks.Add(this);
-						this._book_id = value.id;
-					}
-					else
-					{
-						this._book_id = default(int);
-					}
-					this.SendPropertyChanged("book");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.role")]
-	public partial class role : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _role_name;
-		
-		private EntitySet<user> _users;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void Onrole_nameChanging(string value);
-    partial void Onrole_nameChanged();
-    #endregion
-		
-		public role()
-		{
-			this._users = new EntitySet<user>(new Action<user>(this.attach_users), new Action<user>(this.detach_users));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string role_name
-		{
-			get
-			{
-				return this._role_name;
-			}
-			set
-			{
-				if ((this._role_name != value))
-				{
-					this.Onrole_nameChanging(value);
-					this.SendPropertyChanging();
-					this._role_name = value;
-					this.SendPropertyChanged("role_name");
-					this.Onrole_nameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="role_user", Storage="_users", ThisKey="id", OtherKey="role_id")]
-		public EntitySet<user> users
-		{
-			get
-			{
-				return this._users;
-			}
-			set
-			{
-				this._users.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_users(user entity)
-		{
-			this.SendPropertyChanging();
-			entity.role = this;
-		}
-		
-		private void detach_users(user entity)
-		{
-			this.SendPropertyChanging();
-			entity.role = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[user]")]
-	public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private int _role_id;
-		
-		private string _username;
-		
-		private string _password;
-		
-		private string _email;
-		
-		private System.DateTime _created_at;
-		
-		private System.Nullable<System.DateTime> _deleted_at;
-		
-		private EntitySet<issueBook> _issueBooks;
-		
-		private EntityRef<role> _role;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void Onrole_idChanging(int value);
-    partial void Onrole_idChanged();
-    partial void OnusernameChanging(string value);
-    partial void OnusernameChanged();
-    partial void OnpasswordChanging(string value);
-    partial void OnpasswordChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void Oncreated_atChanging(System.DateTime value);
-    partial void Oncreated_atChanged();
-    partial void Ondeleted_atChanging(System.Nullable<System.DateTime> value);
-    partial void Ondeleted_atChanged();
-    #endregion
-		
-		public user()
-		{
-			this._issueBooks = new EntitySet<issueBook>(new Action<issueBook>(this.attach_issueBooks), new Action<issueBook>(this.detach_issueBooks));
-			this._role = default(EntityRef<role>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="Int NOT NULL", IsDbGenerated=true)]
-		public int role_id
-		{
-			get
-			{
-				return this._role_id;
-			}
-			set
-			{
-				if ((this._role_id != value))
-				{
-					if (this._role.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onrole_idChanging(value);
-					this.SendPropertyChanging();
-					this._role_id = value;
-					this.SendPropertyChanged("role_id");
-					this.Onrole_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string username
-		{
-			get
-			{
-				return this._username;
-			}
-			set
-			{
-				if ((this._username != value))
-				{
-					this.OnusernameChanging(value);
-					this.SendPropertyChanging();
-					this._username = value;
-					this.SendPropertyChanged("username");
-					this.OnusernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string password
-		{
-			get
-			{
-				return this._password;
-			}
-			set
-			{
-				if ((this._password != value))
-				{
-					this.OnpasswordChanging(value);
-					this.SendPropertyChanging();
-					this._password = value;
-					this.SendPropertyChanged("password");
-					this.OnpasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_at", DbType="Date NOT NULL", IsDbGenerated=true)]
-		public System.DateTime created_at
-		{
-			get
-			{
-				return this._created_at;
-			}
-			set
-			{
-				if ((this._created_at != value))
-				{
-					this.Oncreated_atChanging(value);
-					this.SendPropertyChanging();
-					this._created_at = value;
-					this.SendPropertyChanged("created_at");
-					this.Oncreated_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted_at", DbType="DateTime")]
-		public System.Nullable<System.DateTime> deleted_at
-		{
-			get
-			{
-				return this._deleted_at;
-			}
-			set
-			{
-				if ((this._deleted_at != value))
-				{
-					this.Ondeleted_atChanging(value);
-					this.SendPropertyChanging();
-					this._deleted_at = value;
-					this.SendPropertyChanged("deleted_at");
-					this.Ondeleted_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_issueBook", Storage="_issueBooks", ThisKey="id", OtherKey="user_id")]
-		public EntitySet<issueBook> issueBooks
-		{
-			get
-			{
-				return this._issueBooks;
-			}
-			set
-			{
-				this._issueBooks.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="role_user", Storage="_role", ThisKey="role_id", OtherKey="id", IsForeignKey=true)]
-		public role role
-		{
-			get
-			{
-				return this._role.Entity;
-			}
-			set
-			{
-				role previousValue = this._role.Entity;
-				if (((previousValue != value) 
-							|| (this._role.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._role.Entity = null;
-						previousValue.users.Remove(this);
-					}
-					this._role.Entity = value;
-					if ((value != null))
-					{
-						value.users.Add(this);
-						this._role_id = value.id;
-					}
-					else
-					{
-						this._role_id = default(int);
-					}
-					this.SendPropertyChanged("role");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_issueBooks(issueBook entity)
-		{
-			this.SendPropertyChanging();
-			entity.user = this;
-		}
-		
-		private void detach_issueBooks(issueBook entity)
-		{
-			this.SendPropertyChanging();
-			entity.user = null;
 		}
 	}
 	
@@ -784,7 +131,7 @@ namespace library_app
 		
 		private System.Nullable<System.DateTime> _lastIssued_at;
 		
-		private System.Data.Linq.Binary _book_cover;
+		private string _image;
 		
 		private EntitySet<issueBook> _issueBooks;
 		
@@ -810,8 +157,8 @@ namespace library_app
     partial void Onadded_atChanged();
     partial void OnlastIssued_atChanging(System.Nullable<System.DateTime> value);
     partial void OnlastIssued_atChanged();
-    partial void Onbook_coverChanging(System.Data.Linq.Binary value);
-    partial void Onbook_coverChanged();
+    partial void OnimageChanging(string value);
+    partial void OnimageChanged();
     #endregion
 		
 		public book()
@@ -960,7 +307,7 @@ namespace library_app
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_added_at", DbType="DateTime NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_added_at", DbType="DateTime NOT NULL", IsDbGenerated=true, IsVersion=true)]
 		public System.DateTime added_at
 		{
 			get
@@ -1000,22 +347,22 @@ namespace library_app
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_book_cover", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary book_cover
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image", DbType="VarChar(MAX)")]
+		public string image
 		{
 			get
 			{
-				return this._book_cover;
+				return this._image;
 			}
 			set
 			{
-				if ((this._book_cover != value))
+				if ((this._image != value))
 				{
-					this.Onbook_coverChanging(value);
+					this.OnimageChanging(value);
 					this.SendPropertyChanging();
-					this._book_cover = value;
-					this.SendPropertyChanged("book_cover");
-					this.Onbook_coverChanged();
+					this._image = value;
+					this.SendPropertyChanged("image");
+					this.OnimageChanged();
 				}
 			}
 		}
@@ -1063,6 +410,659 @@ namespace library_app
 		{
 			this.SendPropertyChanging();
 			entity.book = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[user]")]
+	public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _role_id;
+		
+		private string _username;
+		
+		private string _password;
+		
+		private string _email;
+		
+		private System.DateTime _created_at;
+		
+		private System.Nullable<System.DateTime> _deleted_at;
+		
+		private EntitySet<issueBook> _issueBooks;
+		
+		private EntityRef<role> _role;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onrole_idChanging(int value);
+    partial void Onrole_idChanged();
+    partial void OnusernameChanging(string value);
+    partial void OnusernameChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void Oncreated_atChanging(System.DateTime value);
+    partial void Oncreated_atChanged();
+    partial void Ondeleted_atChanging(System.Nullable<System.DateTime> value);
+    partial void Ondeleted_atChanged();
+    #endregion
+		
+		public user()
+		{
+			this._issueBooks = new EntitySet<issueBook>(new Action<issueBook>(this.attach_issueBooks), new Action<issueBook>(this.detach_issueBooks));
+			this._role = default(EntityRef<role>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="Int NOT NULL")]
+		public int role_id
+		{
+			get
+			{
+				return this._role_id;
+			}
+			set
+			{
+				if ((this._role_id != value))
+				{
+					if (this._role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onrole_idChanging(value);
+					this.SendPropertyChanging();
+					this._role_id = value;
+					this.SendPropertyChanged("role_id");
+					this.Onrole_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this.OnusernameChanging(value);
+					this.SendPropertyChanging();
+					this._username = value;
+					this.SendPropertyChanged("username");
+					this.OnusernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_at", DbType="DateTime NOT NULL")]
+		public System.DateTime created_at
+		{
+			get
+			{
+				return this._created_at;
+			}
+			set
+			{
+				if ((this._created_at != value))
+				{
+					this.Oncreated_atChanging(value);
+					this.SendPropertyChanging();
+					this._created_at = value;
+					this.SendPropertyChanged("created_at");
+					this.Oncreated_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted_at", DbType="DateTime")]
+		public System.Nullable<System.DateTime> deleted_at
+		{
+			get
+			{
+				return this._deleted_at;
+			}
+			set
+			{
+				if ((this._deleted_at != value))
+				{
+					this.Ondeleted_atChanging(value);
+					this.SendPropertyChanging();
+					this._deleted_at = value;
+					this.SendPropertyChanged("deleted_at");
+					this.Ondeleted_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_issueBook", Storage="_issueBooks", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<issueBook> issueBooks
+		{
+			get
+			{
+				return this._issueBooks;
+			}
+			set
+			{
+				this._issueBooks.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="role_user", Storage="_role", ThisKey="role_id", OtherKey="id", IsForeignKey=true)]
+		public role role
+		{
+			get
+			{
+				return this._role.Entity;
+			}
+			set
+			{
+				role previousValue = this._role.Entity;
+				if (((previousValue != value) 
+							|| (this._role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._role.Entity = null;
+						previousValue.users.Remove(this);
+					}
+					this._role.Entity = value;
+					if ((value != null))
+					{
+						value.users.Add(this);
+						this._role_id = value.id;
+					}
+					else
+					{
+						this._role_id = default(int);
+					}
+					this.SendPropertyChanged("role");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_issueBooks(issueBook entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = this;
+		}
+		
+		private void detach_issueBooks(issueBook entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.issueBook")]
+	public partial class issueBook : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _user_id;
+		
+		private int _book_id;
+		
+		private int _issued_id;
+		
+		private System.DateTime _issue_at;
+		
+		private System.DateTime _due_at;
+		
+		private System.Nullable<System.DateTime> _return_at;
+		
+		private EntityRef<book> _book;
+		
+		private EntityRef<user> _user;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void Onbook_idChanging(int value);
+    partial void Onbook_idChanged();
+    partial void Onissued_idChanging(int value);
+    partial void Onissued_idChanged();
+    partial void Onissue_atChanging(System.DateTime value);
+    partial void Onissue_atChanged();
+    partial void Ondue_atChanging(System.DateTime value);
+    partial void Ondue_atChanged();
+    partial void Onreturn_atChanging(System.Nullable<System.DateTime> value);
+    partial void Onreturn_atChanged();
+    #endregion
+		
+		public issueBook()
+		{
+			this._book = default(EntityRef<book>);
+			this._user = default(EntityRef<user>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._user.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_book_id", DbType="Int NOT NULL")]
+		public int book_id
+		{
+			get
+			{
+				return this._book_id;
+			}
+			set
+			{
+				if ((this._book_id != value))
+				{
+					if (this._book.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onbook_idChanging(value);
+					this.SendPropertyChanging();
+					this._book_id = value;
+					this.SendPropertyChanged("book_id");
+					this.Onbook_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_issued_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int issued_id
+		{
+			get
+			{
+				return this._issued_id;
+			}
+			set
+			{
+				if ((this._issued_id != value))
+				{
+					this.Onissued_idChanging(value);
+					this.SendPropertyChanging();
+					this._issued_id = value;
+					this.SendPropertyChanged("issued_id");
+					this.Onissued_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_issue_at", DbType="DateTime NOT NULL")]
+		public System.DateTime issue_at
+		{
+			get
+			{
+				return this._issue_at;
+			}
+			set
+			{
+				if ((this._issue_at != value))
+				{
+					this.Onissue_atChanging(value);
+					this.SendPropertyChanging();
+					this._issue_at = value;
+					this.SendPropertyChanged("issue_at");
+					this.Onissue_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_due_at", DbType="DateTime NOT NULL")]
+		public System.DateTime due_at
+		{
+			get
+			{
+				return this._due_at;
+			}
+			set
+			{
+				if ((this._due_at != value))
+				{
+					this.Ondue_atChanging(value);
+					this.SendPropertyChanging();
+					this._due_at = value;
+					this.SendPropertyChanged("due_at");
+					this.Ondue_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_return_at", DbType="DateTime")]
+		public System.Nullable<System.DateTime> return_at
+		{
+			get
+			{
+				return this._return_at;
+			}
+			set
+			{
+				if ((this._return_at != value))
+				{
+					this.Onreturn_atChanging(value);
+					this.SendPropertyChanging();
+					this._return_at = value;
+					this.SendPropertyChanged("return_at");
+					this.Onreturn_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_issueBook", Storage="_book", ThisKey="book_id", OtherKey="id", IsForeignKey=true)]
+		public book book
+		{
+			get
+			{
+				return this._book.Entity;
+			}
+			set
+			{
+				book previousValue = this._book.Entity;
+				if (((previousValue != value) 
+							|| (this._book.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._book.Entity = null;
+						previousValue.issueBooks.Remove(this);
+					}
+					this._book.Entity = value;
+					if ((value != null))
+					{
+						value.issueBooks.Add(this);
+						this._book_id = value.id;
+					}
+					else
+					{
+						this._book_id = default(int);
+					}
+					this.SendPropertyChanged("book");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_issueBook", Storage="_user", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public user user
+		{
+			get
+			{
+				return this._user.Entity;
+			}
+			set
+			{
+				user previousValue = this._user.Entity;
+				if (((previousValue != value) 
+							|| (this._user.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user.Entity = null;
+						previousValue.issueBooks.Remove(this);
+					}
+					this._user.Entity = value;
+					if ((value != null))
+					{
+						value.issueBooks.Add(this);
+						this._user_id = value.id;
+					}
+					else
+					{
+						this._user_id = default(int);
+					}
+					this.SendPropertyChanged("user");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.role")]
+	public partial class role : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _role_name;
+		
+		private EntitySet<user> _users;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onrole_nameChanging(string value);
+    partial void Onrole_nameChanged();
+    #endregion
+		
+		public role()
+		{
+			this._users = new EntitySet<user>(new Action<user>(this.attach_users), new Action<user>(this.detach_users));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string role_name
+		{
+			get
+			{
+				return this._role_name;
+			}
+			set
+			{
+				if ((this._role_name != value))
+				{
+					this.Onrole_nameChanging(value);
+					this.SendPropertyChanging();
+					this._role_name = value;
+					this.SendPropertyChanged("role_name");
+					this.Onrole_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="role_user", Storage="_users", ThisKey="id", OtherKey="role_id")]
+		public EntitySet<user> users
+		{
+			get
+			{
+				return this._users;
+			}
+			set
+			{
+				this._users.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_users(user entity)
+		{
+			this.SendPropertyChanging();
+			entity.role = this;
+		}
+		
+		private void detach_users(user entity)
+		{
+			this.SendPropertyChanging();
+			entity.role = null;
 		}
 	}
 }
