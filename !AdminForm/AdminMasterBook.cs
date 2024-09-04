@@ -16,12 +16,12 @@ namespace library_app
     public partial class AdminMasterBook : UserControl
     {
         private LibraryDCDataContext dc = new LibraryDCDataContext();
-        private Image coverImage;
         public AdminMasterBook()
         {
             InitializeComponent();
             loadAvailableBook();
         }
+        private Image coverImage;
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -29,8 +29,8 @@ namespace library_app
             string author = txtAuthor.Text;
             string publisher = txtPublisher.Text;
             DateTime publishedDate = datePublished.Value.Date;
-            int pages = Convert.ToInt32(txtPages.Text);
-            int availableCopies = Convert.ToInt32(txtCopies.Text);
+            int pages;
+            int availableCopies;
             Image bookCover = picCover.Image;
 
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(publisher))
@@ -39,11 +39,22 @@ namespace library_app
                 return;
             }
 
+            if (DateTime.Today > datePublished.Value.Date)
+            {
+                MessageBox.Show("Please pick a valid date!");
+                return;
+            }
+
             if (!int.TryParse(txtPages.Text, out pages) || !int.TryParse(txtCopies.Text, out availableCopies))
             {
                 MessageBox.Show("Please input a valid number for pages and copies");
                 return;
+            }
 
+            if (picCover.Image == null)
+            {
+                MessageBox.Show("Please upload the book cover!");
+                return;
             }
 
             book newBook = new book
