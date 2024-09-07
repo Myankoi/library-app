@@ -131,7 +131,7 @@
             this.datePublished.Name = "datePublished";
             this.datePublished.Size = new System.Drawing.Size(213, 22);
             this.datePublished.TabIndex = 4;
-            this.datePublished.Value = new System.DateTime(2024, 7, 14, 0, 0, 0, 0);
+            this.datePublished.Value = new System.DateTime(2024, 9, 7, 0, 0, 0, 0);
             // 
             // picCover
             // 

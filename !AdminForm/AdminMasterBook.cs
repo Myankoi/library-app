@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Data.Linq;
+using System.Drawing.Imaging;
 
 namespace library_app
 {
@@ -85,9 +86,12 @@ namespace library_app
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                byte[] imageBytes = ms.ToArray();
-                return Convert.ToBase64String(imageBytes);
+                using (Image clonedImage = new Bitmap(image))
+                {
+                    clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    byte[] imageBytes = ms.ToArray();
+                    return Convert.ToBase64String(imageBytes);
+                }
             }
         }
         public Image ConvertBase64ToImage(string imageString)
@@ -177,6 +181,8 @@ namespace library_app
             }
 
             string selectedTitle = dgvAvailableBook.CurrentRow.Cells[0].Value.ToString();
+            string selectedCover = dgvAvailableBook.CurrentRow.Cells[6].Value.ToString();
+
             var bookUpdate = dc.books.SingleOrDefault(b => b.title == selectedTitle);
 
             if (bookUpdate != null)
@@ -187,8 +193,15 @@ namespace library_app
                 bookUpdate.published = publishedDate;
                 bookUpdate.pages = pages;
                 bookUpdate.available_copies = availableCopies;
-                bookUpdate.image = ConvertImageToBase64(bookCover);
 
+                if (selectedCover == ConvertImageToBase64(bookCover))
+                {
+                    bookUpdate.image = ConvertImageToBase64(bookCover);
+                } else
+                {
+                    bookUpdate.image = ConvertImageToBase64(bookCover);
+                }
+                
                 try
                 {
                     dc.SubmitChanges();
@@ -217,7 +230,7 @@ namespace library_app
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.bmp)|*.jpg;*.jpeg;*.bmp";
+            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.bmp;) | *.jpg;*.jpeg;*.bmp";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
