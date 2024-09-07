@@ -39,7 +39,7 @@ namespace library_app
                 return;
             }
 
-            if (DateTime.Today > datePublished.Value.Date)
+            if (DateTime.Today < datePublished.Value.Date)
             {
                 MessageBox.Show("Please pick a valid date!");
                 return;
@@ -78,7 +78,7 @@ namespace library_app
             {
                 MessageBox.Show("Error adding book: " + ex.Message);
             }
-            this.Invalidate();
+            loadAvailableBook();
         }
 
         public String ConvertImageToBase64(Image image)
@@ -105,6 +105,7 @@ namespace library_app
 
         private void loadAvailableBook()
         {
+            dgvAvailableBook.Columns.Clear();
             var availableBooks = dc.books.ToList();
             dgvAvailableBook.Columns.Add("Title", "Title");
             dgvAvailableBook.Columns.Add("Author", "Author");
@@ -114,6 +115,7 @@ namespace library_app
             dgvAvailableBook.Columns.Add("Available", "Available");
             dgvAvailableBook.Columns.Add("Image", "Image");
             dgvAvailableBook.Columns["Image"].Visible = false;
+
             foreach (var book in availableBooks)
             {
                 dgvAvailableBook.Rows.Add(
@@ -134,7 +136,84 @@ namespace library_app
             txtCopies.Text = dgvAvailableBook.CurrentRow.Cells[5].Value.ToString();
             picCover.Image = ConvertBase64ToImage(dgvAvailableBook.CurrentRow.Cells[6].Value.ToString());
         }
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            string title = txtTitle.Text;
+            string author = txtAuthor.Text;
+            string publisher = txtPublisher.Text;
+            DateTime publishedDate = datePublished.Value.Date;
+            int pages;
+            int availableCopies;
+            Image bookCover = picCover.Image;
 
+            if (dgvAvailableBook.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a book to update!");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(publisher))
+            {
+                MessageBox.Show("Please fill all data book!");
+                return;
+            }
+
+            if (DateTime.Today < datePublished.Value.Date)
+            {
+                MessageBox.Show("Please pick a valid date!");
+                return;
+            }
+
+            if (!int.TryParse(txtPages.Text, out pages) || !int.TryParse(txtCopies.Text, out availableCopies))
+            {
+                MessageBox.Show("Please input a valid number for pages and copies");
+                return;
+            }
+
+            if (picCover.Image == null)
+            {
+                MessageBox.Show("Please upload the book cover!");
+                return;
+            }
+
+            string selectedTitle = dgvAvailableBook.CurrentRow.Cells[0].Value.ToString();
+            var bookUpdate = dc.books.SingleOrDefault(b => b.title == selectedTitle);
+
+            if (bookUpdate != null)
+            {
+                bookUpdate.title = title;
+                bookUpdate.author = author;
+                bookUpdate.publisher = publisher;
+                bookUpdate.published = publishedDate;
+                bookUpdate.pages = pages;
+                bookUpdate.available_copies = availableCopies;
+                bookUpdate.image = ConvertImageToBase64(bookCover);
+
+                try
+                {
+                    dc.SubmitChanges();
+                    MessageBox.Show("Book updated successfully");
+                    loadAvailableBook();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Updating Book: " + ex.Message);
+                }
+            } else
+            {
+                MessageBox.Show("Book is not found in database!");
+            }
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtTitle.Clear();
+            txtAuthor.Clear();
+            txtPublisher.Clear();
+            datePublished.ResetText();
+            txtPages.Clear();
+            txtCopies.Clear();
+            picCover.Image = null;
+        }
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -147,15 +226,5 @@ namespace library_app
             }
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            txtTitle.Clear();
-            txtAuthor.Clear();
-            txtPublisher.Clear();
-            datePublished.ResetText();
-            txtPages.Clear();
-            txtCopies.Clear();
-            picCover.Image = null;
-        }
     }
 }

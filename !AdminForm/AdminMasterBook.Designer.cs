@@ -136,7 +136,7 @@
             // picCover
             // 
             this.picCover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.picCover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.picCover.BackColor = System.Drawing.Color.MediumTurquoise;
             this.picCover.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picCover.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picCover.Location = new System.Drawing.Point(749, 6);
@@ -343,6 +343,7 @@
             this.btnUpdate.TabIndex = 8;
             this.btnUpdate.Text = "UPDATE";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // panel3
             // 
