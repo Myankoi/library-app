@@ -17,6 +17,8 @@ namespace library_app
     public partial class AdminMasterBook : UserControl
     {
         private LibraryDCDataContext dc = new LibraryDCDataContext();
+        private int id = 0;
+
         public AdminMasterBook()
         {
             InitializeComponent();
@@ -55,6 +57,12 @@ namespace library_app
             if (picCover.Image == null)
             {
                 MessageBox.Show("Please upload the book cover!");
+                return;
+            }
+
+            if(isExist(title))
+            {
+                MessageBox.Show("The title is already exist");
                 return;
             }
 
@@ -107,6 +115,11 @@ namespace library_app
             return image;
         }
 
+        private bool isExist(string title)
+        {
+            return dc.books.Where(x  => x.title == title).FirstOrDefault() != null;
+        }
+
         private void loadAvailableBook()
         {
             dgvAvailableBook.Columns.Clear();
@@ -118,6 +131,8 @@ namespace library_app
             dgvAvailableBook.Columns.Add("Total Page", "Total Page");
             dgvAvailableBook.Columns.Add("Available", "Available");
             dgvAvailableBook.Columns.Add("Image", "Image");
+            dgvAvailableBook.Columns.Add("ID", "ID");
+            dgvAvailableBook.Columns["ID"].Visible = false;
             dgvAvailableBook.Columns["Image"].Visible = false;
 
             foreach (var book in availableBooks)
@@ -125,7 +140,7 @@ namespace library_app
                 dgvAvailableBook.Rows.Add(
                     book.title, book.author,
                     book.publisher, book.published.ToShortDateString(),
-                    book.pages, book.available_copies, book.image
+                    book.pages, book.available_copies, book.image, book.id
                 );
             }
         }
@@ -139,6 +154,7 @@ namespace library_app
             txtPages.Text = dgvAvailableBook.CurrentRow.Cells[4].Value.ToString();
             txtCopies.Text = dgvAvailableBook.CurrentRow.Cells[5].Value.ToString();
             picCover.Image = ConvertBase64ToImage(dgvAvailableBook.CurrentRow.Cells[6].Value.ToString());
+            id = int.Parse(dgvAvailableBook.CurrentRow.Cells[7].Value.ToString());
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -239,5 +255,18 @@ namespace library_app
             }
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var book = dc.books.Where(x => x.id == id).FirstOrDefault();
+            if (book == null)
+            {
+                MessageBox.Show("kwokwokwokw");
+                return;
+            }
+
+            dc.books.DeleteOnSubmit(book);
+            dc.SubmitChanges();
+            loadAvailableBook();
+        }
     }
 }
