@@ -30,7 +30,7 @@ namespace library_app
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            var search = books.Where(x=>x.title.Contains(txtSearch.Text.ToLower())).ToList();
+            var search = books.Where(b=>b.title.Contains(txtSearch.Text.ToLower())).ToList();
             if (!string.IsNullOrEmpty(txtSearch.Text))
             {
                 populatePanel(search);

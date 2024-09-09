@@ -46,7 +46,7 @@ namespace library_app
         private void btnIssueBook_Click(object sender, EventArgs e)
         {
             MainContainer.Controls.Clear();
-            AdminIssueBook frmIssueBook = new AdminIssueBook();
+            AdminIssueBook frmIssueBook = new AdminIssueBook(MainContainer);
             frmIssueBook.Dock = DockStyle.Fill;
             MainContainer.Controls.Add(frmIssueBook);
         }

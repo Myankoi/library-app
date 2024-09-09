@@ -21,7 +21,6 @@ namespace library_app._AdminForm
             InitializeComponent();
             this.book = book;
             this.mainPanel = mainPanel;
-            lblBookName.Text = book.title;
             pbBook.Image = ConvertBase64ToImage(book.image);
         }
 
@@ -37,13 +36,20 @@ namespace library_app._AdminForm
 
             return image;
         }
-
-        private void BookItem_Click(object sender, EventArgs e)
+        private void pbBook_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
             AdminMasterBook frmSearchBook = new AdminMasterBook(book);
             frmSearchBook.Dock = DockStyle.Fill;
             mainPanel.Controls.Add(frmSearchBook);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            AdminIssueBook frmSearchIssueBook = new AdminIssueBook(book, mainPanel);
+            frmSearchIssueBook.Dock = DockStyle.Fill;
+            mainPanel.Controls.Add(frmSearchIssueBook);
         }
     }
 }

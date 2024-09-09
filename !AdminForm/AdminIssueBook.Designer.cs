@@ -35,29 +35,29 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picBook = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textPublisher = new System.Windows.Forms.TextBox();
+            this.textTitle = new System.Windows.Forms.TextBox();
+            this.textAuthor = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBook)).BeginInit();
             this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -103,14 +103,14 @@
             this.panel7.Controls.Add(this.dateTimePicker2);
             this.panel7.Controls.Add(this.label6);
             this.panel7.Controls.Add(this.dateTimePicker1);
-            this.panel7.Controls.Add(this.pictureBox1);
+            this.panel7.Controls.Add(this.picBook);
             this.panel7.Controls.Add(this.label2);
             this.panel7.Controls.Add(this.label3);
             this.panel7.Controls.Add(this.label4);
             this.panel7.Controls.Add(this.label5);
-            this.panel7.Controls.Add(this.textBox3);
-            this.panel7.Controls.Add(this.textBox1);
-            this.panel7.Controls.Add(this.textBox2);
+            this.panel7.Controls.Add(this.textPublisher);
+            this.panel7.Controls.Add(this.textTitle);
+            this.panel7.Controls.Add(this.textAuthor);
             this.panel7.Location = new System.Drawing.Point(3, 3);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(875, 145);
@@ -138,18 +138,23 @@
             // 
             this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.dateTimePicker1.Location = new System.Drawing.Point(489, 21);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2024, 9, 9, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(2024, 9, 9, 0, 0, 0, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(213, 22);
             this.dateTimePicker1.TabIndex = 4;
+            this.dateTimePicker1.Value = new System.DateTime(2024, 9, 9, 0, 0, 0, 0);
             // 
-            // pictureBox1
+            // picBook
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.pictureBox1.Location = new System.Drawing.Point(749, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(84, 135);
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
+            this.picBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.picBook.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.picBook.Location = new System.Drawing.Point(749, 6);
+            this.picBook.Name = "picBook";
+            this.picBook.Size = new System.Drawing.Size(84, 135);
+            this.picBook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBook.TabIndex = 12;
+            this.picBook.TabStop = false;
             // 
             // label2
             // 
@@ -191,32 +196,32 @@
             this.label5.TabIndex = 3;
             this.label5.Text = "Issue Date :";
             // 
-            // textBox3
+            // textPublisher
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.textBox3.Location = new System.Drawing.Point(107, 101);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(213, 22);
-            this.textBox3.TabIndex = 3;
+            this.textPublisher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.textPublisher.Location = new System.Drawing.Point(107, 101);
+            this.textPublisher.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textPublisher.Name = "textPublisher";
+            this.textPublisher.Size = new System.Drawing.Size(213, 22);
+            this.textPublisher.TabIndex = 3;
             // 
-            // textBox1
+            // textTitle
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.textBox1.Location = new System.Drawing.Point(107, 21);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(213, 22);
-            this.textBox1.TabIndex = 1;
+            this.textTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.textTitle.Location = new System.Drawing.Point(107, 21);
+            this.textTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textTitle.Name = "textTitle";
+            this.textTitle.Size = new System.Drawing.Size(213, 22);
+            this.textTitle.TabIndex = 1;
             // 
-            // textBox2
+            // textAuthor
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.textBox2.Location = new System.Drawing.Point(107, 59);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(213, 22);
-            this.textBox2.TabIndex = 2;
+            this.textAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.textAuthor.Location = new System.Drawing.Point(107, 59);
+            this.textAuthor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textAuthor.Name = "textAuthor";
+            this.textAuthor.Size = new System.Drawing.Size(213, 22);
+            this.textAuthor.TabIndex = 2;
             // 
             // panel6
             // 
@@ -290,18 +295,6 @@
             this.panel3.Size = new System.Drawing.Size(879, 195);
             this.panel3.TabIndex = 3;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeight = 29;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(879, 195);
-            this.dataGridView1.TabIndex = 0;
-            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeight = 29;
@@ -314,23 +307,35 @@
             this.dataGridView2.Size = new System.Drawing.Size(879, 195);
             this.dataGridView2.TabIndex = 1;
             // 
-            // IssueBook
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeight = 29;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(879, 195);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // AdminIssueBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
-            this.Name = "IssueBook";
+            this.Name = "AdminIssueBook";
             this.Size = new System.Drawing.Size(928, 502);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBook)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -342,14 +347,14 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picBook;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textPublisher;
+        private System.Windows.Forms.TextBox textTitle;
+        private System.Windows.Forms.TextBox textAuthor;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
