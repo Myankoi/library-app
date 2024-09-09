@@ -123,7 +123,7 @@ namespace library_app
         private void loadAvailableBook()
         {
             dgvAvailableBook.Columns.Clear();
-            var availableBooks = dc.books.ToList();
+            var availableBooks = dc.books.ToList().OrderBy(b => b.title);
             dgvAvailableBook.Columns.Add("Title", "Title");
             dgvAvailableBook.Columns.Add("Author", "Author");
             dgvAvailableBook.Columns.Add("Publisher", "Publisher");
@@ -257,16 +257,24 @@ namespace library_app
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            var book = dc.books.Where(x => x.id == id).FirstOrDefault();
+            var book = dc.books.Where(b => b.id == id).FirstOrDefault();
             if (book == null)
             {
-                MessageBox.Show("kwokwokwokw");
+                MessageBox.Show("Book is not found in database!");
                 return;
             }
 
-            dc.books.DeleteOnSubmit(book);
-            dc.SubmitChanges();
-            loadAvailableBook();
+            DialogResult dialogResult = MessageBox.Show("Are you sure want to delete this book?", "Delete Book", MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                dc.books.DeleteOnSubmit(book);
+                dc.SubmitChanges();
+                loadAvailableBook();
+            } else
+            {
+                return;
+            }
         }
     }
 }

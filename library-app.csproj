@@ -87,6 +87,12 @@
     <Compile Include="!AdminForm\AdminMasterBook.Designer.cs">
       <DependentUpon>AdminMasterBook.cs</DependentUpon>
     </Compile>
+    <Compile Include="!AdminForm\BookItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="!AdminForm\BookItem.Designer.cs">
+      <DependentUpon>BookItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="!Common\Dashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     <Compile Include="!Services\UserServices.cs" />
     <EmbeddedResource Include="!AdminForm\AdminMasterBook.resx">
       <DependentUpon>AdminMasterBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="!AdminForm\BookItem.resx">
+      <DependentUpon>BookItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="!Common\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
