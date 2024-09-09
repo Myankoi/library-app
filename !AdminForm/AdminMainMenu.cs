@@ -38,7 +38,7 @@ namespace library_app
         private void btnSearchBook_Click(object sender, EventArgs e)
         {
             MainContainer.Controls.Clear();
-            AdminSearchBook frmSearchBook = new AdminSearchBook();
+            AdminSearchBook frmSearchBook = new AdminSearchBook(MainContainer);
             frmSearchBook.Dock = DockStyle.Fill;
             MainContainer.Controls.Add(frmSearchBook);
         }

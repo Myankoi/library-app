@@ -24,6 +24,22 @@ namespace library_app
             InitializeComponent();
             loadAvailableBook();
         }
+
+        public AdminMasterBook(book book)
+        {
+            InitializeComponent();
+            loadAvailableBook();
+
+            txtTitle.Text = book.title;
+            txtAuthor.Text = book.author;
+            txtPublisher.Text = book.publisher;
+            datePublished.Text = book.published.ToString();
+            txtPages.Text = book.pages.ToString();
+            txtCopies.Text = book.available_copies.ToString();
+            picCover.Image = ConvertBase64ToImage(book.image.ToString());
+            id = int.Parse(book.id.ToString());
+        }
+
         private Image coverImage;
 
         private void btnAdd_Click(object sender, EventArgs e)
