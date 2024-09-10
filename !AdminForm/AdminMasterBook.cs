@@ -11,12 +11,14 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data.Linq;
 using System.Drawing.Imaging;
+using library_app._Services;
 
 namespace library_app
 {
     public partial class AdminMasterBook : UserControl
     {
         private LibraryDCDataContext dc = new LibraryDCDataContext();
+        private ConvertHelper convertHelper = new ConvertHelper();
         private int id = 0;
 
         public AdminMasterBook()
@@ -36,7 +38,7 @@ namespace library_app
             datePublished.Text = book.published.ToString();
             txtPages.Text = book.pages.ToString();
             txtCopies.Text = book.available_copies.ToString();
-            picCover.Image = ConvertBase64ToImage(book.image.ToString());
+            picCover.Image = convertHelper.ConvertBase64ToImage(book.image.ToString());
             id = int.Parse(book.id.ToString());
         }
 
@@ -90,7 +92,7 @@ namespace library_app
                 published = publishedDate,
                 pages = pages,
                 available_copies = availableCopies,
-                image = ConvertImageToBase64(bookCover)
+                image = convertHelper.ConvertImageToBase64(bookCover)
             };
 
             dc.books.InsertOnSubmit(newBook);
@@ -104,31 +106,6 @@ namespace library_app
                 MessageBox.Show("Error adding book: " + ex.Message);
             }
             loadAvailableBook();
-        }
-
-        public String ConvertImageToBase64(Image image)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (Image clonedImage = new Bitmap(image))
-                {
-                    clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    byte[] imageBytes = ms.ToArray();
-                    return Convert.ToBase64String(imageBytes);
-                }
-            }
-        }
-        public Image ConvertBase64ToImage(string imageString)
-        {
-            byte[] bytes = Convert.FromBase64String(imageString);
-
-            Image image;
-            using (MemoryStream ms = new MemoryStream(bytes))
-            {
-                image = Image.FromStream(ms);
-            }
-
-            return image;
         }
 
         private bool isExist(string title)
@@ -169,7 +146,7 @@ namespace library_app
             datePublished.Text = dgvAvailableBook.CurrentRow.Cells[3].Value.ToString();
             txtPages.Text = dgvAvailableBook.CurrentRow.Cells[4].Value.ToString();
             txtCopies.Text = dgvAvailableBook.CurrentRow.Cells[5].Value.ToString();
-            picCover.Image = ConvertBase64ToImage(dgvAvailableBook.CurrentRow.Cells[6].Value.ToString());
+            picCover.Image = convertHelper.ConvertBase64ToImage(dgvAvailableBook.CurrentRow.Cells[6].Value.ToString());
             id = int.Parse(dgvAvailableBook.CurrentRow.Cells[7].Value.ToString());
         }
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -226,12 +203,12 @@ namespace library_app
                 bookUpdate.pages = pages;
                 bookUpdate.available_copies = availableCopies;
 
-                if (selectedCover == ConvertImageToBase64(bookCover))
+                if (selectedCover == convertHelper.ConvertImageToBase64(bookCover))
                 {
-                    bookUpdate.image = ConvertImageToBase64(bookCover);
+                    bookUpdate.image = convertHelper.ConvertImageToBase64(bookCover);
                 } else
                 {
-                    bookUpdate.image = ConvertImageToBase64(bookCover);
+                    bookUpdate.image = convertHelper.ConvertImageToBase64(bookCover);
                 }
                 
                 try

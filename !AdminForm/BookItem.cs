@@ -1,4 +1,5 @@
-﻿using System;
+﻿using library_app._Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace library_app._AdminForm
 {
     public partial class BookItem : UserControl
     {
+        private ConvertHelper convertHelper = new ConvertHelper();
         private Panel mainPanel;
         private book book;
 
@@ -21,21 +23,9 @@ namespace library_app._AdminForm
             InitializeComponent();
             this.book = book;
             this.mainPanel = mainPanel;
-            pbBook.Image = ConvertBase64ToImage(book.image);
+            pbBook.Image = convertHelper.ConvertBase64ToImage(book.image);
         }
 
-        public Image ConvertBase64ToImage(string imageString)
-        {
-            byte[] bytes = Convert.FromBase64String(imageString);
-
-            Image image;
-            using (MemoryStream ms = new MemoryStream(bytes))
-            {
-                image = Image.FromStream(ms);
-            }
-
-            return image;
-        }
         private void pbBook_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
