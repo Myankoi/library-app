@@ -99,6 +99,7 @@
     <Compile Include="!Common\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="!Services\ConvertHelper.cs" />
     <Compile Include="!Services\DatabaseHelper.cs" />
     <Compile Include="!Services\HashingPassword.cs" />
     <Compile Include="!AdminForm\AdminIssueBook.cs">
